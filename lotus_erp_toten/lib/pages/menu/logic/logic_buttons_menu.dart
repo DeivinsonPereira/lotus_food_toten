@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lotus_erp_toten/pages/cart/cart_shop.dart';
 import 'package:lotus_erp_toten/utils/pdv/features/pdv_update.dart';
 import 'package:lotus_erp_toten/utils/quantity_back.dart';
 
@@ -15,11 +17,9 @@ class LogicButtonsMenu {
 
   void cancelOrder() {
     QuantityBack.back(2);
-    _pdvRemove.removeAllCartShopping();
-    _pdvUpdate.changeIsExpandedByParam(false);
   }
 
   void finishOrder(BuildContext context) {
-    _pdvUpdate.changeIsExpandedByParam(false);
+    Get.to(() => const CartShopPage());
   }
 }

@@ -1,5 +1,6 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lotus_erp_toten/common/custom_elevated_button.dart';
@@ -10,6 +11,7 @@ import 'package:lotus_erp_toten/utils/custom_text_style.dart';
 import 'package:lotus_erp_toten/utils/dependencies.dart';
 import 'package:lotus_erp_toten/utils/pdv/features/pdv_update.dart';
 
+import '../../common/custom_size_text.dart';
 import '../menu/menu_page.dart';
 
 class OptionPage extends StatelessWidget {
@@ -59,16 +61,17 @@ class OptionPage extends StatelessWidget {
     }
 
     Widget _buildQuestionText() {
-      return const Expanded(
+      return Expanded(
         child: Align(
           alignment: Alignment.topCenter,
-          child: Text(
+          child: AutoSizeText(
             'O que deseja fazer hoje?',
             style: TextStyle(
-                fontSize: 60,
+                fontSize: CustomSizeText.sizeText(75),
                 fontWeight: FontWeight.w600,
                 letterSpacing: 1,
                 color: Colors.white),
+            maxLines: 1,
           ),
         ),
       );
@@ -80,7 +83,7 @@ class OptionPage extends StatelessWidget {
         child: CustomElevatedButton(
             colorButton: CustomColors.secondaryColor,
             text: text,
-            style: CustomTextStyle.blackBoldText(40),
+            style: CustomTextStyle.blackBoldText(CustomSizeText.sizeText(100)),
             function: () {
               _pdvUpdate.setMealOption(option);
               Get.to(() => const MenuPage(),

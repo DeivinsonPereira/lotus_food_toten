@@ -46,6 +46,7 @@ class ConfigFeatures {
   Future<void> updateImagesLogo() async {
     for (var i = 0; i < 2; i++) {
       List<image_path_logo> items = await _configGet.getLogos();
+      if (items.isEmpty) return;
       if (items.length == 3) {
         _configController.imagePathLogoPadrao = items[0];
         _configController.imagePathLogoBranca = items[1];
@@ -138,7 +139,6 @@ class ConfigFeatures {
     _configController.ip = empresaValida.ipServer!;
     _configController.empresaValida = empresaValida;
   }
-
 
   // Faz a atualização da variavel empresa
   Future<void> updateVariableEmpresa() async {

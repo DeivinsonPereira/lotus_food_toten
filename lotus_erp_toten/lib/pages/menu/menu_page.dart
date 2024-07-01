@@ -28,6 +28,10 @@ class MenuPage extends StatelessWidget {
     final _logicButtons = LogicButtonsMenu.instance;
     Size size = Get.size;
 
+    Widget _buildHeader() {
+      return CustomHeader(text: 'Qual o seu pedido?');
+    }
+
     Widget _buildCardGroup(int index, produto_grupo grupoSelecionado) {
       return GestureDetector(
         onTap: () {
@@ -65,34 +69,36 @@ class MenuPage extends StatelessWidget {
 
     // Constrói o grid dos produtos
     Widget _buildGridProducts() {
-      return Obx(
-        () => GridView.builder(
-          itemCount: _pdvController.filteredProducts.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 4,
-            childAspectRatio: 3 / 4,
-            mainAxisSpacing: 10,
-          ),
-          itemBuilder: (context, index) {
-            var produtoSelecionado = _pdvController.filteredProducts[index];
-            return GestureDetector(
-              onTap: () {
-                _pdvUpdate.changeIsExpandedByParam(false);
-                _pdvUpdate.setComplementosFiltered(produtoSelecionado);
-                _pdvRemove.clearComplementoController();
-                Get.dialog(
-                  barrierDismissible: false,
-                  ComplementPage(
-                    produtoSelected: produtoSelecionado,
-                  ),
+      return Padding(
+          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+          child: Obx(
+            () => GridView.builder(
+              itemCount: _pdvController.filteredProducts.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                childAspectRatio: 3 / 4,
+                mainAxisSpacing: 10,
+              ),
+              itemBuilder: (context, index) {
+                var produtoSelecionado = _pdvController.filteredProducts[index];
+                return GestureDetector(
+                  onTap: () {
+                    _pdvUpdate.changeIsExpandedByParam(false);
+                    _pdvUpdate.setComplementosFiltered(produtoSelecionado);
+                    _pdvRemove.clearComplementoController();
+                    Get.dialog(
+                      barrierDismissible: false,
+                      ComplementPage(
+                        produtoEscolhido: produtoSelecionado,
+                      ),
+                    );
+                  },
+                  child: CardProductMenu(
+                      size: size, produtoEscolhido: produtoSelecionado),
                 );
               },
-              child: CardProductMenu(
-                  size: size, produtoEscolhido: produtoSelecionado),
-            );
-          },
-        ),
-      );
+            ),
+          ));
     }
 
     Widget _buildButtons(Color color, String text, Function() function) {
@@ -128,6 +134,10 @@ class MenuPage extends StatelessWidget {
       );
     }
 
+    Widget _buildContainerResume() {
+      return CustomContainerResume(size: size, isVisible: true);
+    }
+
     // Constrói o corpo da página
     return Scaffold(
       body: Stack(
@@ -138,11 +148,10 @@ class MenuPage extends StatelessWidget {
               width: size.width,
               child: Column(
                 children: [
-                  CustomHeader(text: 'Qual o seu pedido?'),
+                  _buildHeader(),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    child: _buildLineGroup(),
-                  ),
+                      padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                      child: _buildLineGroup()),
                   const SizedBox(height: 10),
                   const Padding(
                     padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -150,13 +159,9 @@ class MenuPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: _buildGridProducts(),
-                    ),
+                    child: _buildGridProducts(),
                   ),
-                  // Resumo do pedido
-                  CustomContainerResume(size: size, isVisible: true),
+                  _buildContainerResume(),
                   _buildLineButtons(),
                 ],
               ),

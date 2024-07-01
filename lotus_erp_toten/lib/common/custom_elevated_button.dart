@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: must_be_immutable
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -43,14 +44,14 @@ class CustomElevatedButton extends StatelessWidget {
   // Retorna o widget com o texto e o icone
   Widget _buildTextAndIcon() {
     if (icon == null) {
-      return Text(text, style: style, textAlign: TextAlign.center);
+      return AutoSizeText(text, style: style, textAlign: TextAlign.center);
     }
 
     if (_isIconDown()) {
       return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(text, style: style, textAlign: TextAlign.center),
+          AutoSizeText(text, style: style, textAlign: TextAlign.center),
           Icon(icon, color: Colors.white, size: 30)
         ],
       );
@@ -60,7 +61,7 @@ class CustomElevatedButton extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(text, style: style, textAlign: TextAlign.center),
+          AutoSizeText(text, style: style, textAlign: TextAlign.center),
           const SizedBox(width: 10),
           Icon(icon, color: Colors.white, size: 30),
         ],
@@ -73,7 +74,7 @@ class CustomElevatedButton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon, color: Colors.white, size: 30),
-          Text(text, style: style, textAlign: TextAlign.center),
+          AutoSizeText(text, style: style, textAlign: TextAlign.center),
         ],
       );
     }

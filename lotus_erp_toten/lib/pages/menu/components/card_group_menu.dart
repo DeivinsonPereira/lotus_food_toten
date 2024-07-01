@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:lotus_erp_toten/common/custom_image.dart';
+import 'package:lotus_erp_toten/common/custom_size_text.dart';
 import 'package:lotus_erp_toten/model/collection/produto_grupo.dart';
 
 class CardsMenu extends StatelessWidget {
@@ -40,12 +42,12 @@ class CardsMenu extends StatelessWidget {
                   border: Border.all(color: Colors.black, width: 0.5),
                 ),
                 child: Center(
-                  child: Text(
+                  child: AutoSizeText(
                     groupSelected.grupo_descricao ?? '',
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
-                        fontSize: 15),
+                        fontSize: CustomSizeText.sizeText(15)),
                     textAlign: TextAlign.center,
                   ),
                 ),

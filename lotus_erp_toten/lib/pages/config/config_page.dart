@@ -1,7 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lotus_erp_toten/common/custom_elevated_button.dart';
 import 'package:lotus_erp_toten/common/custom_image.dart';
+import 'package:lotus_erp_toten/common/custom_size_text.dart';
 import 'package:lotus_erp_toten/controller/config_controller.dart';
 import 'package:lotus_erp_toten/controller/load_data_controller.dart';
 import 'package:lotus_erp_toten/model/charge_data.dart';
@@ -21,8 +23,6 @@ class ConfigPage extends StatelessWidget {
     final double heightButton = Get.size.height * 0.07;
     final _customImage = CustomImage.instance;
     final _configController = Dependencies.configController();
-    const double sizeTitles = 34;
-    const double sizetext = 24;
 
     Widget _buildCheckbox(ChargeData data, int index) {
       return GestureDetector(
@@ -32,7 +32,7 @@ class ConfigPage extends StatelessWidget {
         child: Row(
           children: [
             Transform.scale(
-              scale: 1.3,
+              scale: 1.6,
               child: Checkbox(
                 shape: const CircleBorder(),
                 checkColor: Colors.white,
@@ -44,11 +44,16 @@ class ConfigPage extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: Get.size.height * 0.02,
+              height: Get.size.height * 0.06,
             ),
-            Text(
-              data.name,
-              style: CustomTextStyle.blackBoldText(sizetext),
+            SizedBox(
+              width: Get.size.width * 0.5,
+              child: AutoSizeText(
+                data.name,
+                maxLines: 1,
+                style:
+                    CustomTextStyle.blackBoldText(CustomSizeText.sizeText(45)),
+              ),
             ),
           ],
         ),
@@ -58,15 +63,19 @@ class ConfigPage extends StatelessWidget {
     Widget _buildTitleConfig() {
       return Align(
           alignment: Alignment.centerLeft,
-          child: Text('Configuração',
-              style: CustomTextStyle.blackBoldText(sizeTitles)));
+          child: AutoSizeText('Configuração',
+              maxLines: 1,
+              maxFontSize: 100,
+              style:
+                  CustomTextStyle.blackBoldText(CustomSizeText.sizeText(75))));
     }
 
     Widget _buildTitleChageData() {
       return Align(
           alignment: Alignment.centerLeft,
           child: Text('Carga de Dados',
-              style: CustomTextStyle.blackBoldText(sizeTitles)));
+              style:
+                  CustomTextStyle.blackBoldText(CustomSizeText.sizeText(75))));
     }
 
     Widget _buildDropBoxColor() {
@@ -75,21 +84,29 @@ class ConfigPage extends StatelessWidget {
     }
 
     Widget _buildItensLoad() {
-      return GetBuilder<LoadDataController>(
-        builder: (_) {
-          return ListView.builder(
-              itemCount: _.listCheckbox.length,
-              itemBuilder: (context, index) {
-                ChargeData data = _.listCheckbox[index];
-                return _buildCheckbox(data, index);
-              });
-        },
+      return Align(
+        alignment: Alignment.centerLeft,
+        child: SizedBox(
+          width: Get.size.width * 0.6,
+          child: GetBuilder<LoadDataController>(
+            builder: (_) {
+              return ListView.builder(
+                  itemCount: _.listCheckbox.length,
+                  itemBuilder: (context, index) {
+                    ChargeData data = _.listCheckbox[index];
+                    return _buildCheckbox(data, index);
+                  });
+            },
+          ),
+        ),
       );
     }
 
     Widget _buildLogo() {
-      return _customImage.getLogo( _configController.imagePathLogoBranca.path_image ?? '',
-          width: Get.size.width * 0.3, height: Get.size.width * 0.3);
+      return _customImage.getLogo(
+          _configController.imagePathLogoPadrao.path_image ?? '',
+          width: Get.size.width * 0.3,
+          height: Get.size.width * 0.3);
     }
 
     Widget _buildChargeButton() {
@@ -99,7 +116,7 @@ class ConfigPage extends StatelessWidget {
         child: CustomElevatedButton(
           colorButton: CustomColors.primaryColor,
           text: 'Carga de Dados',
-          style: CustomTextStyle.whiteBoldText(24),
+          style: CustomTextStyle.whiteBoldText(100),
           rounded: 10,
           function: () async => await _loadDataFeatures.loadData(context),
         ),
@@ -113,7 +130,7 @@ class ConfigPage extends StatelessWidget {
         child: CustomElevatedButton(
             colorButton: CustomColors.informationBox,
             text: 'Voltar',
-            style: CustomTextStyle.whiteBoldText(24),
+            style: CustomTextStyle.whiteBoldText(50),
             rounded: 10,
             function: () {
               Get.back();

@@ -38,8 +38,8 @@ class CustomCardResume extends StatelessWidget {
     Widget _buildEditButton() {
       return IconButton(
         onPressed: () {
-        // TODO - Implementar o botão de editar
-      // menuController.editItemCarrinho(itemEscolhido, index);
+          // TODO - Implementar o botão de editar
+          // menuController.editItemCarrinho(itemEscolhido, index);
         },
         icon: const Icon(
           Icons.edit,

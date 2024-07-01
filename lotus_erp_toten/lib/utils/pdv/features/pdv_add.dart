@@ -70,7 +70,7 @@ class PdvAdd {
       return;
     }
 
-    complement.quantity++;
+    // complement.quantity++; TODO verificar
 
     _pdvController.update();
   }

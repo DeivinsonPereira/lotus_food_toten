@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lotus_erp_toten/common/custom_elevated_button.dart';
@@ -8,6 +9,7 @@ import 'package:lotus_erp_toten/utils/custom_colors.dart';
 import 'package:lotus_erp_toten/utils/dependencies.dart';
 import 'package:pinput/pinput.dart';
 
+import '../../../../common/custom_size_text.dart';
 import '../../../../utils/custom_text_style.dart';
 
 class CreatePasswordDialogMobile extends StatelessWidget {
@@ -32,12 +34,13 @@ class CreatePasswordDialogMobile extends StatelessWidget {
     // Constrói o texto do dialog
     Widget _buildText() {
       return SizedBox(
-        height: height * 0.08,
+        width: Get.size.width * 0.5,
         child: Align(
           alignment: Alignment.bottomCenter,
-          child: Text(
+          child: AutoSizeText(
             'Defina a sua senha',
-            style: CustomTextStyle.blackText(20),
+            maxLines: 2,
+            style: CustomTextStyle.blackText(CustomSizeText.sizeText(75)),
             textAlign: TextAlign.center,
           ),
         ),
@@ -48,7 +51,7 @@ class CreatePasswordDialogMobile extends StatelessWidget {
     Widget _buildPasswordField() {
       return Pinput(
         defaultPinTheme: PinTheme(
-          textStyle: CustomTextStyle.whiteBoldText(24),
+          textStyle: CustomTextStyle.whiteBoldText(CustomSizeText.sizeText(40)),
           decoration: BoxDecoration(
               color: Colors.grey, borderRadius: BorderRadius.circular(10)),
           height: height * 0.08,
@@ -68,7 +71,7 @@ class CreatePasswordDialogMobile extends StatelessWidget {
         child: CustomElevatedButton(
             colorButton: CustomColors.informationBox,
             text: 'Voltar',
-            style: CustomTextStyle.whiteBoldText(20),
+            style: CustomTextStyle.whiteBoldText(CustomSizeText.sizeText(100)),
             function: () {
               _configFeatures.clearPasswordConfigAndController();
               Get.back();
@@ -115,7 +118,7 @@ class CreatePasswordDialogMobile extends StatelessWidget {
         ),
         child: SizedBox(
           height: height * 0.5,
-          width: width * 0.5,
+          width: width * 0.6,
           child: _buildBody(),
         ),
       ),

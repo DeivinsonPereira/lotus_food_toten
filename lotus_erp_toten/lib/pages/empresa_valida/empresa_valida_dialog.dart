@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:lotus_erp_toten/common/custom_elevated_button.dart';
 import 'package:lotus_erp_toten/common/custom_header_popup.dart';
-import 'package:lotus_erp_toten/controller/custom_text_field.dart';
+import 'package:lotus_erp_toten/common/custom_text_field.dart';
 import 'package:lotus_erp_toten/pages/logout/logout_page.dart';
 import 'package:lotus_erp_toten/service/license_approval_flow.dart';
 import 'package:lotus_erp_toten/utils/custom_colors.dart';

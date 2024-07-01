@@ -1,6 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lotus_erp_toten/common/custom_image.dart';
+import 'package:lotus_erp_toten/common/custom_size_text.dart';
 import 'package:lotus_erp_toten/pages/config/popups/logic/logic_buttons_password.dart';
 import 'package:lotus_erp_toten/pages/slider/slider_page.dart';
 import 'package:lotus_erp_toten/service/open_empresa_valida.dart';
@@ -24,15 +26,17 @@ class HomePage extends StatelessWidget {
 
     // Constrói o texto da página
     Widget _buildText() {
-      return const SizedBox(
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
         child: Center(
-          child: Text(
+          child: AutoSizeText(
             'Clique no botão para iniciar',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 60,
+              fontSize: CustomSizeText.sizeText(100),
               color: Colors.white,
             ),
+            maxLines: 2,
             textAlign: TextAlign.center,
           ),
         ),
@@ -49,7 +53,7 @@ class HomePage extends StatelessWidget {
             function: () async => Get.to(() => SliderPage()),
             rounded: 0,
             colorButton: CustomColors.secondaryColor,
-            style: CustomTextStyle.blackBoldText(45)),
+            style: CustomTextStyle.blackBoldText(CustomSizeText.sizeText(100))),
       );
     }
 
@@ -78,8 +82,8 @@ class HomePage extends StatelessWidget {
     Widget _buildLogo() {
       return CustomImage.instance.getLogo(
           _configController.imagePathLogoBranca.path_image ?? '',
-          height: Get.size.width * 0.4,
-          width: Get.size.width * 0.4);
+          height: Get.size.width * 0.3,
+          width: Get.size.width * 0.3);
     }
 
     // Faz a chamada do Scaffold

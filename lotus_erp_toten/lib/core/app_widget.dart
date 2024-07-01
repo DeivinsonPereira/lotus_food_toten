@@ -22,7 +22,6 @@ class AppWidget extends StatelessWidget {
   }
 }
 
-
 class ImmersiveModeObserver extends NavigatorObserver {
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {

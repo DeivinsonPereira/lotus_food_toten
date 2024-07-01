@@ -1,7 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lotus_erp_toten/common/custom_image.dart';
+import 'package:lotus_erp_toten/common/custom_size_text.dart';
 import 'package:lotus_erp_toten/utils/dependencies.dart';
 
 import '../utils/custom_colors.dart';
@@ -38,7 +40,12 @@ class CustomHeader extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(text, style: CustomTextStyle.whiteBoldText(30)),
+            child: AutoSizeText(
+              text,
+              style: CustomTextStyle.whiteBoldText(
+                CustomSizeText.sizeText(100),
+              ),
+            ),
           ),
           isIdentify == true
               ? const SizedBox()
